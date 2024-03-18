@@ -35,7 +35,7 @@ public class BlogsController {
 	
 	@PostMapping
 	public Blog saveBlog(@RequestBody Blog owner) {
-		System.out.println("Owner save called...");
+		System.out.println("Blog save called...");
 		Blog blog = blogsService.save(owner);
 		System.out.println("Saved!!!");
 
@@ -44,7 +44,7 @@ public class BlogsController {
 
 	@GetMapping("/{id}")
 	public String getBlogs(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
-		System.out.println("Owner get called...");
+		System.out.println("Blog get called...");
 		Blog blog = blogsService.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Blog not found :: " + id));
 		System.out.println("\nBlog details with Comments :: \n" + blog);
@@ -55,7 +55,7 @@ public class BlogsController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Blog> updateUser(@PathVariable(value = "id") Long id, @Valid @RequestBody Blog blogDetails)
+	public ResponseEntity<Blog> updateBlog(@PathVariable(value = "id") Long id, @Valid @RequestBody Blog blogDetails)
 			throws ResourceNotFoundException {
 		Blog blog = blogsService.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Blog not found :: " + id));
@@ -76,7 +76,7 @@ public class BlogsController {
 	}
 	
 	@DeleteMapping
-	public Map<String, Boolean> deleteAll() throws ResourceNotFoundException {
+	public Map<String, Boolean> deleteAllBlogs() throws ResourceNotFoundException {
 		
 		blogsService.deleteAll();
 		Map<String, Boolean> response = new HashMap<>();
